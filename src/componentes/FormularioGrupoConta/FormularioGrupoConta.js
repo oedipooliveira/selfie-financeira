@@ -5,7 +5,7 @@ import CampoTexto from '../CampoTexto/CampoTexto';
 import ListaSuspensa from '../ListaSuspensa/ListaSuspensa';
 import Botao from '../Botao/Botao';
 
-const FormularioGrupoConta = () => {
+const FormularioGrupoConta = (props) => {
 
     const grupos = [
         'Alimentação',
@@ -23,7 +23,11 @@ const FormularioGrupoConta = () => {
 
     const aoSalvar = (event) => {
         event.preventDefault();
-        console.log('Form submetido => ', nome, descricao, grupo);
+        props.aoSalvar({
+            nome,
+            descricao,
+            grupo
+        });
     }
 
     const [nome, setNome] = useState('');
