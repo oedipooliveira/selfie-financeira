@@ -6,7 +6,6 @@ import ListaSuspensa from '../ListaSuspensa/ListaSuspensa';
 import Botao from '../Botao/Botao';
 
 const FormularioDespesa = (props) => {
-
     const aoSalvar = (event) => {
         event.preventDefault();
         props.aoSalvar({
@@ -14,21 +13,10 @@ const FormularioDespesa = (props) => {
             valor,
             grupo
         });
+        setDescricao('');
+        setValor('');
+        setGrupo('');
     }
-
-    const grupos = [
-        'Alimentação',
-        'Moradia',
-        'Educação',
-        'Animal de Estimação',
-        'Saúde',
-        'Transporte',
-        'Pessoa',
-        'Lazer',
-        'Serviços Financeiros',
-        'Renda',
-        'Renda Extra'
-    ];
 
     const [descricao, setDescricao] = useState('');
     const [valor, setValor] = useState('');
@@ -53,7 +41,7 @@ const FormularioDespesa = (props) => {
                 valor={grupo}
                 aoAlterado={valor => setGrupo(valor)}
                 label="Grupo"
-                itens={grupos}
+                itens={props.grupos}
             />
             <Botao>
                 Salvar
