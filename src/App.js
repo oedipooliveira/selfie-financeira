@@ -70,6 +70,10 @@ function App() {
         setDespesas([...despesas, despesa])
     }
 
+    const aoDeletar = () => {
+        console.log('não é face');
+    }
+
     return (
         <div className="App">
             <Header></Header>
@@ -85,6 +89,7 @@ function App() {
                 corPrimaria={grupo.corPrimaria}
                 corSecundaria={grupo.corSecundaria}
                 despesas={despesas.filter(despesa => despesa.grupo === grupo.nome)}
+                aoDeletar={aoDeletar}
             />)}
 
             <Rodape />

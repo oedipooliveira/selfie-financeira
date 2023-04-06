@@ -1,15 +1,17 @@
 import './GrupoDespesa.css';
 import Despesa from '../Despesa/Despesa';
 
-const GrupoDespesa = (props) => {
-    const cssSection = { backgroundColor: props.corSecundaria };
-    const cssH3 = { borderColor: props.corPrimaria };
+const GrupoDespesa = ({corSecundaria, corPrimaria, despesas, nome, aoDeletar}) => {
+    const cssSection = { backgroundColor: corSecundaria };
+    const cssH3 = { borderColor: corPrimaria };
 
     return (
-        (props.despesas.length > 0) && <section className="grupo" style={cssSection}>
-            <h3 style={cssH3}>{props.nome}</h3>
+        (despesas.length > 0) && <section className="grupo" style={cssSection}>
+            <h3 style={cssH3}>{nome}</h3>
             <div className="despesas">
-                {props.despesas.map(despesa => <Despesa key={despesa.descricao} descricao={despesa.descricao} valor={despesa.valor} corDeFundo={props.corPrimaria} />)}
+                {despesas.map((despesa, indice) => {
+                    return <Despesa key={indice} descricao={despesa.descricao} valor={despesa.valor} corDeFundo={corPrimaria} aoDeletar={aoDeletar} />;
+                })}
             </div>
         </section>
     )

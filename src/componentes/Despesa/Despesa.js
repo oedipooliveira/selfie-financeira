@@ -1,9 +1,10 @@
 import './Despesa.css'
 
-const Despesa = ({descricao, valor, corDeFundo}) => {
+const Despesa = ({descricao, valor, corDeFundo, aoDeletar}) => {
     const cssCabecalho = {backgroundColor: corDeFundo};
     return (
         <div className="despesa">
+            <div className="deletar" onClick={aoDeletar}>deletar</div>
             <div className="cabecalho" style={cssCabecalho}>
                 <img src="https://github.com/oedipooliveira.png" alt="Imagem representando a despesa"/>
             </div>
