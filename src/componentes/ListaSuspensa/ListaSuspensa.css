@@ -8,12 +8,14 @@
 }
 
 .lista-suspensa select {
-    background-color: #FFF;
-    border-radius: 5px;
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.06);
-    width: 100%;
-    border: none;
-    font-size: 18px;
-    padding: 12px;
+    background: 0 0;
+    border: 2px solid #f2f2f2;
+    border-radius: 4px !important;
     box-sizing: border-box;
+    color: #561dba;
+    font-family: Poppins,sans-serif;
+    font-size: 1.6em;
+    outline: 0;
+    padding: 13px 10px;
+    width: 100%;
 }
