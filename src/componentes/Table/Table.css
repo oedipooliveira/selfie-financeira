@@ -1,0 +1,38 @@
+.table {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.table table {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.6em;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+  max-width: 80%;
+  width: 80%;
+}
+
+.table table caption {
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.table table th, .table table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.table table th {
+  background-color: #f2f2f2;
+}
+
+.table table tr {
+  background-color: #f9f9f9;
+}
+
+.table table tr:hover {
+  background-color: #f2f2f2;
+}

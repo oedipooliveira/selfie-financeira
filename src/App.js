@@ -3,6 +3,7 @@ import Header from './componentes/Header/Header';
 import FormularioDespesa from './componentes/FormularioDespesa/FormularioDespesa';
 import GrupoDespesa from './componentes/GrupoDespesa/GrupoDespesa';
 import Rodape from './componentes/Rodape/Rodape';
+import Table from './componentes/Table/Table';
 
 function App() {
 
@@ -82,6 +83,8 @@ function App() {
                 aoSalvar={despesa => aoSalvar(despesa)}
                 grupos={grupos.map(grupo => grupo.nome)}
             />
+
+            <Table />
 
             {grupos.map(grupo => <GrupoDespesa
                 key={grupo.nome}
