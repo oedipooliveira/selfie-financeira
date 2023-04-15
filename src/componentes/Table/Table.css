@@ -4,33 +4,46 @@
     margin: 40px 0;
 }
 
+.table .container {
+    max-width: 80%;
+    width: 80%;
+    background-color: #FFF;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.08);
+}
+
 .table table {
-  font-family: "Poppins", sans-serif;
-  font-size: 1.6em;
-  border-collapse: collapse;
-  border: 1px solid #ccc;
-  max-width: 80%;
-  width: 80%;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.6em;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    width: 100%;
 }
 
 .table table caption {
-  text-align: center;
-  font-weight: bold;
-  border: 1px solid #ccc;
-  padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    padding: 15px;
 }
 
 .table table th, .table table td {
-  padding: 10px;
-  border: 1px solid #ccc;
+    padding: 15px;
+    border: 1px solid #ccc;
 }
 
-.table table th {
-  background-color: #f2f2f2;
+.table table caption {
+    border-bottom: none;
+}
+
+.table table th, .table table caption {
+    background-color: #f2f2f2;
+    color: #561dba;
 }
 
 .table table tr {
-  background-color: #f9f9f9;
+  background-color: #fefefe;
 }
 
 .table table tr:hover {

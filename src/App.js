@@ -7,6 +7,18 @@ import Table from './componentes/Table/Table';
 
 function App() {
 
+    const colunas = [
+        {
+            titulo: 'Descrição'
+        },
+        {
+            titulo: 'Grupo'
+        },
+        {
+            titulo: 'Valor'
+        }
+    ];
+
     const grupos = [
         {
             nome: 'Alimentação',
@@ -84,16 +96,9 @@ function App() {
                 grupos={grupos.map(grupo => grupo.nome)}
             />
 
-            <Table />
-
-            {grupos.map(grupo => <GrupoDespesa
-                key={grupo.nome}
-                nome={grupo.nome}
-                corPrimaria={grupo.corPrimaria}
-                corSecundaria={grupo.corSecundaria}
-                despesas={despesas.filter(despesa => despesa.grupo === grupo.nome)}
-                aoDeletar={aoDeletar}
-            />)}
+            <Table colunas={colunas}>
+                {despesas.map(despesa => <tr><td>{despesa.descricao}</td><td>{despesa.grupo}</td><td>{despesa.valor}</td></tr>)}
+            </Table>
 
             <Rodape />
         </div>
