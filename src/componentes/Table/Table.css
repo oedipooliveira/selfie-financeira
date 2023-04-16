@@ -21,20 +21,33 @@
     width: 100%;
 }
 
-.table table caption {
-    text-align: center;
-    font-weight: bold;
-    border: 1px solid #ccc;
-    padding: 15px;
-}
-
 .table table th, .table table td {
     padding: 15px;
     border: 1px solid #ccc;
 }
 
 .table table caption {
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.table table caption {
     border-bottom: none;
+}
+
+.table .container-flex {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.table .container-flex .botao {
+    font-size: 1em;
+    margin: 0;
+    width: auto;
+    padding: 10px;
 }
 
 .table table th, .table table caption {

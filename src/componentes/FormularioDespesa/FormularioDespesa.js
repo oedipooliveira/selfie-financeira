@@ -1,17 +1,93 @@
 import './FormularioDespesa.css';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Formulario from '../Formulario/Formulario';
 import CampoTexto from '../CampoTexto/CampoTexto';
 import ListaSuspensa from '../ListaSuspensa/ListaSuspensa';
 import Botao from '../Botao/Botao';
 
 const FormularioDespesa = (props) => {
+
+    const navigate = useNavigate();
+
+    const grupos = [
+        {
+            nome: 'Alimentação',
+            corPrimaria: '#57C278',
+            corSecundaria: '#D9F7E9'
+        },
+        {
+            nome: 'Moradia',
+            corPrimaria: '#82CFFA',
+            corSecundaria: '#E8F8FF'
+        },
+        {
+            nome: 'Educação',
+            corPrimaria: '#A6D157',
+            corSecundaria: '#F0F8E2'
+        },
+        {
+            nome: 'Animal de Estimação',
+            corPrimaria: '#E06B69',
+            corSecundaria: '#FDE7E8'
+        },
+        {
+            nome: 'Saúde',
+            corPrimaria: '#D86EBF',
+            corSecundaria: '#FAE5F5'
+        },
+        {
+            nome: 'Transporte',
+            corPrimaria: '#FEBA05',
+            corSecundaria: '#FFF5D9'
+        },
+        {
+            nome: 'Pessoa',
+            corPrimaria: '#FF8A29',
+            corSecundaria: '#FFEEDF'
+        },
+        {
+            nome: 'Lazer',
+            corPrimaria: '#57C278',
+            corSecundaria: '#D9F7E9'
+        },
+        {
+            nome: 'Serviços Financeiros',
+            corPrimaria: '#82CFFA',
+            corSecundaria: '#E8F8FF'
+        },
+        {
+            nome: 'Renda',
+            corPrimaria: '#A6D157',
+            corSecundaria: '#F0F8E2'
+        },
+        {
+            nome: 'Renda Extra',
+            corPrimaria: '#E06B69',
+            corSecundaria: '#FDE7E8'
+        }
+    ];
+
     const aoSalvar = (event) => {
         event.preventDefault();
-        props.aoSalvar({
-            descricao,
-            valor
-        });
+
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(
+                {
+                    descricao,
+                    valor
+                }
+            )
+        };
+
+        fetch("http://localhost:8080/despesas", requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                navigate('/despesa');
+            });
+
         setDescricao('');
         setValor('');
         setGrupo('');
@@ -40,7 +116,7 @@ const FormularioDespesa = (props) => {
                 valor={grupo}
                 aoAlterado={valor => setGrupo(valor)}
                 label="Grupo"
-                itens={props.grupos}
+                itens={grupos.map(grupo => grupo.nome)}
             />
             <Botao>
                 Salvar
