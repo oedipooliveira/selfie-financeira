@@ -10,8 +10,7 @@ const FormularioDespesa = (props) => {
         event.preventDefault();
         props.aoSalvar({
             descricao,
-            valor,
-            grupo
+            valor
         });
         setDescricao('');
         setValor('');

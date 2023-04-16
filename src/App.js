@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { AiFillCloseCircle } from 'react-icons/ai';
 import Header from './componentes/Header/Header';
 import FormularioDespesa from './componentes/FormularioDespesa/FormularioDespesa';
-import GrupoDespesa from './componentes/GrupoDespesa/GrupoDespesa';
 import Rodape from './componentes/Rodape/Rodape';
 import Table from './componentes/Table/Table';
 
@@ -16,6 +16,9 @@ function App() {
         },
         {
             titulo: 'Valor'
+        },
+        {
+            titulo: 'Ações'
         }
     ];
 
@@ -79,12 +82,39 @@ function App() {
 
     const [despesas, setDespesas] = useState([]);
 
+    useEffect(() => {
+        async function fetchDespesas() {
+            const response = await fetch('http://localhost:8080/despesas');
+            const despesasJson = await response.json();
+            setDespesas(despesasJson);
+        }
+        fetchDespesas();
+    }, []);
+
     const aoSalvar = (despesa) => {
-        setDespesas([...despesas, despesa])
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(despesa)
+        };
+
+        fetch("http://localhost:8080/despesas", requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setDespesas([...despesas, data])
+            });
     }
 
-    const aoDeletar = () => {
-        console.log('não é face');
+    const aoDeletar = (id) => {
+        fetch(`http://localhost:8080/despesas/${id}`, {
+            method: 'DELETE',
+        })
+        .then(response => response.json())
+        .then(data => {
+            setDespesas(despesas.filter(despesa => despesa._id !== id))
+        })
+        .catch(error => console.error(error))
     }
 
     return (
@@ -97,7 +127,7 @@ function App() {
             />
 
             <Table colunas={colunas}>
-                {despesas.map(despesa => <tr><td>{despesa.descricao}</td><td>{despesa.grupo}</td><td>{despesa.valor}</td></tr>)}
+                {despesas.map(despesa => <tr key={despesa._id}><td>{despesa.descricao}</td><td>{despesa.grupo? despesa.grupo.nome : ''}</td><td>{despesa.valor}</td><td><AiFillCloseCircle size={25} onClick={() => aoDeletar(despesa._id)} /></td></tr>)}
             </Table>
 
             <Rodape />
