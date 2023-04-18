@@ -1,4 +1,4 @@
-import './Table.css';
+import './Tabela.css';
 import Botao from '../Botao/Botao';
 
 const Table = ({titulo, colunas, children, aoClicarEmNovo}) => {

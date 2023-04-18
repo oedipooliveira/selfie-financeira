@@ -1,25 +1,17 @@
-import { AiFillCloseCircle } from 'react-icons/ai';
+import { AiTwotoneDelete } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Table from '../Table/Table';
+import Tabela from '../Tabela/Tabela';
+import FormataValorReal from '../../util/FormataValorReal';
 
 function TabelaDespesa() {
 
     const navigate = useNavigate();
 
     const colunas = [
-        {
-            titulo: 'Descrição'
-        },
-        {
-            titulo: 'Grupo'
-        },
-        {
-            titulo: 'Valor'
-        },
-        {
-            titulo: 'Ações'
-        }
+        { titulo: 'Descrição' },
+        { titulo: 'Valor' },
+        { titulo: 'Ações' }
     ];
 
     const [despesas, setDespesas] = useState([]);
@@ -49,9 +41,9 @@ function TabelaDespesa() {
     }
 
     return (
-        <Table colunas={colunas} titulo="Despesas" aoClicarEmNovo={aoClicarEmNovo}>
-            {despesas.map(despesa => <tr key={despesa._id}><td>{despesa.descricao}</td><td>{despesa.grupo? despesa.grupo.nome : ''}</td><td>{despesa.valor}</td><td><AiFillCloseCircle size={25} onClick={() => aoDeletar(despesa._id)} /></td></tr>)}
-        </Table>
+        <Tabela colunas={colunas} titulo="Despesas" aoClicarEmNovo={aoClicarEmNovo}>
+            {despesas.map(despesa => <tr key={despesa._id}><td>{despesa.descricao}</td><td className='text-right'>{FormataValorReal(despesa.valor)}</td><td className='text-center'><AiTwotoneDelete size={20} onClick={() => aoDeletar(despesa._id)} /></td></tr>)}
+        </Tabela>
     );
 }
 
