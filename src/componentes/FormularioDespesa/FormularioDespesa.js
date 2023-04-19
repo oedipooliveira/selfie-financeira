@@ -1,19 +1,36 @@
 import './FormularioDespesa.css';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Formulario from '../Formulario/Formulario';
 import CampoTexto from '../CampoTexto/CampoTexto';
 import Botao from '../Botao/Botao';
 
 const FormularioDespesa = (props) => {
 
+    const { id } = useParams();
     const navigate = useNavigate();
+
+    const [descricao, setDescricao] = useState('');
+    const [valor, setValor] = useState('');
+
+    useEffect(() => {
+        async function buscarDespesa() {
+            const response = await fetch(`http://localhost:8080/despesas/${id}`);
+            const despesaJson = await response.json();
+            setDescricao(despesaJson.descricao);
+            setValor(despesaJson.valor);
+        }
+
+        if (id) {
+            buscarDespesa();
+        }
+    }, [id]);
 
     const aoSalvar = (event) => {
         event.preventDefault();
 
         const requestOptions = {
-            method: "POST",
+            method: (id != null ? "PUT" : "POST"),
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(
                 {
@@ -23,7 +40,7 @@ const FormularioDespesa = (props) => {
             )
         };
 
-        fetch("http://localhost:8080/despesas", requestOptions)
+        fetch(`http://localhost:8080/despesas/${id != null ? id : ''}`, requestOptions)
             .then(response => response.json())
             .then(data => {
                 navigate('/despesa');
@@ -32,9 +49,6 @@ const FormularioDespesa = (props) => {
         setDescricao('');
         setValor('');
     }
-
-    const [descricao, setDescricao] = useState('');
-    const [valor, setValor] = useState('');
 
     return (
         <Formulario titulo="Despesa" onSubmit={aoSalvar}>

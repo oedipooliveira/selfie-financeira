@@ -19,3 +19,14 @@ code {
 .text-center {
     text-align: center;
 }
+
+.buttonIcon {
+    border-radius: 5px;
+    margin: 0 2.5px;
+    padding: 5px;
+}
+
+.buttonIcon:hover {
+    cursor: pointer;
+    background: #ddd;
+}

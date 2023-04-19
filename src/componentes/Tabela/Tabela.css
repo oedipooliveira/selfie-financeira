@@ -26,6 +26,10 @@
     border: 1px solid #ccc;
 }
 
+.table table td {
+    padding: 10px;
+}
+
 .table table caption {
     text-align: center;
     font-weight: bold;

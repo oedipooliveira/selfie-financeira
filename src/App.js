@@ -13,9 +13,9 @@ function App() {
             <Routes>
                 <Route path="/" element={<div>Página inicial</div>} />
                 <Route path="/despesa" element={<TabelaDespesa/>} />
-                <Route path="/despesa/form" element={<FormularioDespesa/>} />
+                <Route path="/despesa/form/:id?" element={<FormularioDespesa/>} />
                 <Route path="/receita" element={<TabelaDespesa/>} />
-                <Route path="/receita/form" element={<FormularioDespesa/>} />
+                <Route path="/receita/form/:id?" element={<FormularioDespesa/>} />
                 <Route path="*" element={<div>Página não encontrada</div>} />
             </Routes>
 
