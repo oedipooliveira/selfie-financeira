@@ -10,7 +10,14 @@
     border-radius: 0 !important;
     box-shadow: -4px 4px !important;
     color: #000;
-    width: 100%;
     margin: 16px 0;
     box-sizing: border-box;
+}
+
+.full {
+    width: 100%;
+}
+
+.blue {
+    background-color: #6278F7 !important;
 }

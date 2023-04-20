@@ -1,6 +1,7 @@
 import './FormularioDespesa.css';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { IoMdArrowRoundBack } from 'react-icons/io';
 import Formulario from '../Formulario/Formulario';
 import CampoTexto from '../CampoTexto/CampoTexto';
 import Botao from '../Botao/Botao';
@@ -65,9 +66,14 @@ const FormularioDespesa = (props) => {
                 label="Valor"
                 placeholder="Digite o valor da despesa"
             />
-            <Botao>
-                Salvar
-            </Botao>
+            <div className="flexbox">
+                <Botao type="button" cor="blue">
+                    <IoMdArrowRoundBack size={15} />
+                </Botao>
+                <Botao type="submit" largura="full">
+                    Salvar
+                </Botao>
+            </div>
         </Formulario>
     );
 }
