@@ -1,7 +1,7 @@
 import './FormularioDespesa.css';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { IoMdArrowRoundBack } from 'react-icons/io';
+import { FaArrowLeft } from 'react-icons/fa';
 import Formulario from '../Formulario/Formulario';
 import CampoTexto from '../CampoTexto/CampoTexto';
 import Botao from '../Botao/Botao';
@@ -51,6 +51,10 @@ const FormularioDespesa = (props) => {
         setValor('');
     }
 
+    const aoCancelar = () => {
+        navigate('/despesa');
+    }
+
     return (
         <Formulario titulo="Despesa" onSubmit={aoSalvar}>
             <CampoTexto
@@ -67,8 +71,8 @@ const FormularioDespesa = (props) => {
                 placeholder="Digite o valor da despesa"
             />
             <div className="flexbox">
-                <Botao type="button" cor="blue">
-                    <IoMdArrowRoundBack size={15} />
+                <Botao aoClicar={aoCancelar} type="button" cor="blue">
+                    <FaArrowLeft size={15} />
                 </Botao>
                 <Botao type="submit" largura="full">
                     Salvar

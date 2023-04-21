@@ -8,7 +8,7 @@
     padding: 14px 20px;
     background-color: #ffec64 !important;
     border-radius: 0 !important;
-    box-shadow: -4px 4px !important;
+    box-shadow: black -4px 4px !important;
     color: #000;
     margin: 16px 0;
     box-sizing: border-box;
@@ -20,4 +20,5 @@
 
 .blue {
     background-color: #6278F7 !important;
+    color: white;
 }
