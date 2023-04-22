@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Tabela from '../Tabela/Tabela';
 import FormataValorReal from '../../util/FormataValorReal';
+import FormataData from '../../util/FormataData';
 
 function TabelaDespesa() {
 
@@ -12,6 +13,7 @@ function TabelaDespesa() {
     const colunas = [
         { titulo: 'Descrição' },
         { titulo: 'Valor' },
+        { titulo: 'Vencimento' },
         { titulo: 'Ações' }
     ];
 
@@ -49,6 +51,7 @@ function TabelaDespesa() {
                 <tr key={despesa._id}>
                     <td>{despesa.descricao}</td>
                     <td className='text-right'>{FormataValorReal(despesa.valor)}</td>
+                    <td className='text-center'>{FormataData(despesa.vencimento)}</td>
                     <td className='text-center'>
                         <AiFillCloseCircle className='buttonIcon' size={20} onClick={() => aoDeletar(despesa._id)} />
                         <AiFillEdit className='buttonIcon' size={20} onClick={() => aoEditar(despesa._id)} />

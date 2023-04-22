@@ -6,6 +6,9 @@ function Header() {
         <header className="header">
             <h1>Selfie Financeira</h1>
             <nav className="nav">
+                <Link className="link" to="/grupo">
+                    Grupos
+                </Link>
                 <Link className="link" to="/despesa">
                     Despesas
                 </Link>

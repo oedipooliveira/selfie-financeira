@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import Formulario from '../Formulario/Formulario';
 import CampoTexto from '../CampoTexto/CampoTexto';
+import CampoData from '../CampoData/CampoData';
 import Botao from '../Botao/Botao';
 
 const FormularioDespesa = (props) => {
@@ -13,6 +14,7 @@ const FormularioDespesa = (props) => {
 
     const [descricao, setDescricao] = useState('');
     const [valor, setValor] = useState('');
+    const [vencimento, setVencimento] = useState('');
 
     useEffect(() => {
         async function buscarDespesa() {
@@ -20,6 +22,7 @@ const FormularioDespesa = (props) => {
             const despesaJson = await response.json();
             setDescricao(despesaJson.descricao);
             setValor(despesaJson.valor);
+            setVencimento(despesaJson.vencimento);
         }
 
         if (id) {
@@ -36,7 +39,8 @@ const FormularioDespesa = (props) => {
             body: JSON.stringify(
                 {
                     descricao,
-                    valor
+                    valor,
+                    vencimento
                 }
             )
         };
@@ -49,6 +53,7 @@ const FormularioDespesa = (props) => {
 
         setDescricao('');
         setValor('');
+        setVencimento('');
     }
 
     const aoCancelar = () => {
@@ -69,6 +74,11 @@ const FormularioDespesa = (props) => {
                 aoAlterado={valor => setValor(valor)}
                 label="Valor"
                 placeholder="Digite o valor da despesa"
+            />
+            <CampoData
+                valor={vencimento}
+                aoAlterado={valor => setVencimento(valor)}
+                label="Data de vencimento"
             />
             <div className="flexbox">
                 <Botao aoClicar={aoCancelar} type="button" cor="blue">
