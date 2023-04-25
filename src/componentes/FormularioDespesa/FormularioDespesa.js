@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import Formulario from '../Formulario/Formulario';
+import ListaSuspensa from '../ListaSuspensa/ListaSuspensa';
 import CampoTexto from '../CampoTexto/CampoTexto';
 import CampoData from '../CampoData/CampoData';
 import Botao from '../Botao/Botao';
@@ -15,6 +16,8 @@ const FormularioDespesa = (props) => {
     const [descricao, setDescricao] = useState('');
     const [valor, setValor] = useState('');
     const [vencimento, setVencimento] = useState('');
+    const [grupo, setGrupo] = useState('');
+    const [grupos, setGrupos] = useState([]);
 
     useEffect(() => {
         async function buscarDespesa() {
@@ -23,12 +26,22 @@ const FormularioDespesa = (props) => {
             setDescricao(despesaJson.descricao);
             setValor(despesaJson.valor);
             setVencimento(despesaJson.vencimento);
+            setGrupo(despesaJson.grupo._id);
         }
 
         if (id) {
             buscarDespesa();
         }
     }, [id]);
+
+    useEffect(() => {
+        async function fetchGrupos() {
+            const response = await fetch('http://localhost:8080/grupos');
+            const gruposJson = await response.json();
+            setGrupos(gruposJson);
+        }
+        fetchGrupos();
+    }, []);
 
     const aoSalvar = (event) => {
         event.preventDefault();
@@ -40,7 +53,8 @@ const FormularioDespesa = (props) => {
                 {
                     descricao,
                     valor,
-                    vencimento
+                    vencimento,
+                    grupo
                 }
             )
         };
@@ -54,6 +68,7 @@ const FormularioDespesa = (props) => {
         setDescricao('');
         setValor('');
         setVencimento('');
+        setGrupo('');
     }
 
     const aoCancelar = () => {
@@ -73,12 +88,21 @@ const FormularioDespesa = (props) => {
                 valor={valor}
                 aoAlterado={valor => setValor(valor)}
                 label="Valor"
+                obrigatorio={true}
                 placeholder="Digite o valor da despesa"
             />
             <CampoData
                 valor={vencimento}
                 aoAlterado={valor => setVencimento(valor)}
+                obrigatorio={true}
                 label="Data de vencimento"
+            />
+            <ListaSuspensa
+                valor={grupo}
+                aoAlterado={valor => setGrupo(valor)}
+                obrigatorio={true}
+                label="Grupo"
+                itens={grupos.map(g => ({key: g._id, value: g.nome}))}
             />
             <div className="flexbox">
                 <Botao aoClicar={aoCancelar} type="button" cor="blue">
