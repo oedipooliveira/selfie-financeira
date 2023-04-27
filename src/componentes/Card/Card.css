@@ -1,0 +1,42 @@
+.card {
+    width: 100%;
+    background-color: #FFF;
+    border-radius: 10px;
+    padding: 17px;
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.08);
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-blue {
+    border-left: 4px solid #6278F7;
+}
+
+.card-red {
+    border-left: 4px solid rgb(152, 46, 81);
+}
+
+.card-green {
+    border-left: 4px solid rgb(0, 121, 107);
+}
+
+.card .titulo {
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: 400;
+    gap: 10px;
+}
+
+.card .valor {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+}
+
+.card .titulo .icone svg {
+    background-color: rgb(0, 121, 107);
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}

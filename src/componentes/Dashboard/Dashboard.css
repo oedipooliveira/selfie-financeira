@@ -1,0 +1,7 @@
+.dashboard {
+    max-width: 80%;
+    width: 80%;
+    justify-content: center;
+    display: flex;
+    margin: 20px auto;
+}
