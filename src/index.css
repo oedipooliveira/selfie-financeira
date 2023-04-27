@@ -30,3 +30,18 @@ code {
     cursor: pointer;
     background: #ddd;
 }
+
+.green {
+    background-color: rgb(0, 121, 107) !important;
+    color: white;
+}
+
+.red {
+    background-color: rgb(152, 46, 81) !important;
+    color: white;
+}
+
+.blue {
+    background-color: #6278F7 !important;
+    color: white;
+}

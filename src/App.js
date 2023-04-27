@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from './componentes/Header/Header';
+import Dashboard from './componentes/Dashboard/Dashboard';
 import TabelaGrupo from './componentes/TabelaGrupo/TabelaGrupo';
 import FormularioGrupo from './componentes/FormularioGrupo/FormularioGrupo';
 import TabelaDespesa from './componentes/TabelaDespesa/TabelaDespesa';
@@ -16,6 +17,7 @@ function App() {
 
             <Routes>
                 <Route path="/" element={<div>Página inicial</div>} />
+                <Route path="/dashboard" element={<Dashboard/>} />
                 <Route path="/grupo" element={<TabelaGrupo/>} />
                 <Route path="/grupo/form/:id?" element={<FormularioGrupo/>} />
                 <Route path="/despesa" element={<TabelaDespesa/>} />
