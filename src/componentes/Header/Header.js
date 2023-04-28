@@ -18,6 +18,9 @@ function Header() {
                 <Link className="link" to="/receita">
                     Receitas
                 </Link>
+                <Link className="link" to="/meta">
+                    Metas
+                </Link>
             </nav>
         </header>
     );

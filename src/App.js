@@ -7,6 +7,8 @@ import TabelaDespesa from './componentes/TabelaDespesa/TabelaDespesa';
 import FormularioDespesa from './componentes/FormularioDespesa/FormularioDespesa';
 import TabelaReceita from './componentes/TabelaReceita/TabelaReceita';
 import FormularioReceita from './componentes/FormularioReceita/FormularioReceita';
+import TabelaMeta from './componentes/TabelaMeta/TabelaMeta';
+import FormularioMeta from './componentes/FormularioMeta/FormularioMeta';
 import Rodape from './componentes/Rodape/Rodape';
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
                 <Route path="/despesa/form/:id?" element={<FormularioDespesa/>} />
                 <Route path="/receita" element={<TabelaReceita/>} />
                 <Route path="/receita/form/:id?" element={<FormularioReceita/>} />
+                <Route path="/meta" element={<TabelaMeta/>} />
+                <Route path="/meta/form/:id?" element={<FormularioMeta/>} />
                 <Route path="*" element={<div>Página não encontrada</div>} />
             </Routes>
 
