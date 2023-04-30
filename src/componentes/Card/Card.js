@@ -1,4 +1,5 @@
 import './Card.css';
+import FormataValorReal from '../../util/FormataValorReal';
 
 function Card(props) {
     return (
@@ -9,7 +10,7 @@ function Card(props) {
                 </span>
                 <span>{props.titulo}</span>
             </div>
-            <span className='valor text-center'>R$ 500,00</span>
+            <span className='valor text-center'>{FormataValorReal(props.valor)}</span>
         </div>
     );
 }

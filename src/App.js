@@ -5,6 +5,7 @@ import TabelaGrupo from './componentes/TabelaGrupo/TabelaGrupo';
 import FormularioGrupo from './componentes/FormularioGrupo/FormularioGrupo';
 import TabelaDespesa from './componentes/TabelaDespesa/TabelaDespesa';
 import FormularioDespesa from './componentes/FormularioDespesa/FormularioDespesa';
+import FormularioDespesaQuitacao from './componentes/FormularioDespesaQuitacao/FormularioDespesaQuitacao';
 import TabelaReceita from './componentes/TabelaReceita/TabelaReceita';
 import FormularioReceita from './componentes/FormularioReceita/FormularioReceita';
 import TabelaMeta from './componentes/TabelaMeta/TabelaMeta';
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/grupo/form/:id?" element={<FormularioGrupo/>} />
                 <Route path="/despesa" element={<TabelaDespesa/>} />
                 <Route path="/despesa/form/:id?" element={<FormularioDespesa/>} />
+                <Route path="/despesa/form-quitacao/:id?" element={<FormularioDespesaQuitacao/>} />
                 <Route path="/receita" element={<TabelaReceita/>} />
                 <Route path="/receita/form/:id?" element={<FormularioReceita/>} />
                 <Route path="/meta" element={<TabelaMeta/>} />

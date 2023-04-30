@@ -1,0 +1,16 @@
+.campo-exibicao {
+    margin: 16px 0;
+}
+
+.campo-exibicao label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.campo-exibicao span {
+    display: block;
+    color: #561dba;
+    font-size: 1.6em;
+    font-family: Poppins,sans-serif;
+    padding: 10px;
+}
