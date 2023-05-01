@@ -1,4 +1,5 @@
 import { AiFillCloseCircle, AiFillEdit } from 'react-icons/ai';
+import { BsPiggyBankFill } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Tabela from '../Tabela/Tabela';
@@ -57,6 +58,7 @@ function TabelaMeta() {
                     <td className='text-center'>
                         <AiFillCloseCircle className='buttonIcon' size={20} onClick={() => aoDeletar(meta._id)} />
                         <AiFillEdit className='buttonIcon' size={20} onClick={() => aoEditar(meta._id)} />
+                        <BsPiggyBankFill className='buttonIcon' size={20} onClick={() => aoEditar(meta._id)} />
                     </td>
                 </tr>
             ))}

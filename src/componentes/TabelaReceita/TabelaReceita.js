@@ -1,9 +1,10 @@
-import { AiFillCloseCircle, AiFillEdit } from 'react-icons/ai';
+import { AiFillCloseCircle, AiFillEdit, AiOutlineCarryOut } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Tabela from '../Tabela/Tabela';
 import FormataValorReal from '../../util/FormataValorReal';
 import FormataData from '../../util/FormataData';
+import FormataFormaPagamento from '../../util/FormataFormaPagamento';
 
 function TabelaReceita() {
 
@@ -14,6 +15,7 @@ function TabelaReceita() {
         { titulo: 'Descrição' },
         { titulo: 'Valor' },
         { titulo: 'Recebimento' },
+        { titulo: 'Forma de recebimento' },
         { titulo: 'Ações' }
     ];
 
@@ -41,6 +43,10 @@ function TabelaReceita() {
         navigate(`/receita/form/${id}`);
     }
 
+    const aoQuitar = (id) => {
+        navigate(`/receita/form-quitacao/${id}`);
+    }
+
     const aoClicarEmNovo = () => {
         navigate('/receita/form');
     }
@@ -52,9 +58,11 @@ function TabelaReceita() {
                     <td>{receita.descricao}</td>
                     <td className='text-right'>{FormataValorReal(receita.valor)}</td>
                     <td className='text-center'>{FormataData(receita.recebimento)}</td>
+                    <td className='text-center'>{FormataFormaPagamento(receita.formaRecebimento)}</td>
                     <td className='text-center'>
                         <AiFillCloseCircle className='buttonIcon' size={20} onClick={() => aoDeletar(receita._id)} />
                         <AiFillEdit className='buttonIcon' size={20} onClick={() => aoEditar(receita._id)} />
+                        <AiOutlineCarryOut className='buttonIcon' size={20} onClick={() => aoQuitar(receita._id)} />
                     </td>
                 </tr>
             ))}
