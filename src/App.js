@@ -11,6 +11,7 @@ import FormularioReceita from './componentes/FormularioReceita/FormularioReceita
 import FormularioReceitaQuitacao from './componentes/FormularioReceitaQuitacao/FormularioReceitaQuitacao';
 import TabelaMeta from './componentes/TabelaMeta/TabelaMeta';
 import FormularioMeta from './componentes/FormularioMeta/FormularioMeta';
+import FormularioMetaDeposito from './componentes/FormularioMetaDeposito/FormularioMetaDeposito';
 import Rodape from './componentes/Rodape/Rodape';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
                 <Route path="/receita/form-quitacao/:id?" element={<FormularioReceitaQuitacao/>} />
                 <Route path="/meta" element={<TabelaMeta/>} />
                 <Route path="/meta/form/:id?" element={<FormularioMeta/>} />
+                <Route path="/meta/form-deposito/:id?" element={<FormularioMetaDeposito/>} />
                 <Route path="*" element={<div>Página não encontrada</div>} />
             </Routes>
 

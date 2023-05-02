@@ -1,13 +1,15 @@
-import './FormularioMeta.css';
+import './FormularioMetaDeposito.css';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import Formulario from '../Formulario/Formulario';
 import CampoTexto from '../CampoTexto/CampoTexto';
-import CampoData from '../CampoData/CampoData';
+import CampoExibicao from '../CampoExibicao/CampoExibicao';
 import Botao from '../Botao/Botao';
+import FormataValorReal from '../../util/FormataValorReal';
+import FormataData from '../../util/FormataData';
 
-const FormularioMeta = (props) => {
+const FormularioMetaDeposito = (props) => {
 
     const { id } = useParams();
     const navigate = useNavigate();
@@ -16,7 +18,10 @@ const FormularioMeta = (props) => {
     const [data, setData] = useState('');
     const [nome, setNome] = useState('');
     const [motivo, setMotivo] = useState('');
-    const [valorGuardado, setValorGuardado] = useState(0);
+    const [valorGuardado, setValorGuardado] = useState('');
+
+    const [valorGuardadoOriginal, setValorGuardadoOriginal] = useState('');
+    const [valorDepositar, setValorDepositar] = useState('');
 
     useEffect(() => {
         async function buscarMeta() {
@@ -26,7 +31,7 @@ const FormularioMeta = (props) => {
             setData(metaJson.data);
             setNome(metaJson.nome);
             setMotivo(metaJson.motivo);
-            setValorGuardado(metaJson.valorGuardado);
+            setValorGuardadoOriginal(metaJson.valorGuardado);
         }
 
         if (id) {
@@ -61,6 +66,7 @@ const FormularioMeta = (props) => {
         setData('');
         setNome('');
         setMotivo('');
+        setValorDepositar('');
         setValorGuardado('');
     }
 
@@ -68,34 +74,27 @@ const FormularioMeta = (props) => {
         navigate('/meta');
     }
 
+    const aoAlterarValorDepositar = (valor) => {
+        setValorDepositar(valor);
+        if (valor != null && !isNaN(valor)) {
+            setValorGuardado(parseFloat(valorGuardadoOriginal) + parseFloat(valor));
+        } else {
+            setValorGuardado(valorGuardadoOriginal);
+        }
+    }
+
     return (
-        <Formulario titulo="Metas" onSubmit={aoSalvar}>
+        <Formulario titulo="Depósito" onSubmit={aoSalvar}>
+            <CampoExibicao valor={FormataValorReal(valor)} label="Eu preciso de" />
+            <CampoExibicao valor={FormataData(data)} label="Até" />
+            <CampoExibicao valor={nome} label="Para" />
+            <CampoExibicao valor={motivo} label="Porque" />
             <CampoTexto
-                valor={valor}
-                aoAlterado={valor => setValor(valor)}
-                label="Eu preciso de"
+                valor={valorDepositar}
+                aoAlterado={valor => aoAlterarValorDepositar(valor)}
+                label="Valor à depositar"
                 obrigatorio={true}
-                placeholder="Digite o valor necessário para alcançar a meta"
-            />
-            <CampoData
-                valor={data}
-                aoAlterado={valor => setData(valor)}
-                obrigatorio={true}
-                label="Até"
-            />
-            <CampoTexto
-                valor={nome}
-                aoAlterado={valor => setNome(valor)}
-                label="Para"
-                obrigatorio={true}
-                placeholder="Digite o nome da meta"
-            />
-            <CampoTexto
-                valor={motivo}
-                aoAlterado={valor => setMotivo(valor)}
-                label="Porque"
-                obrigatorio={true}
-                placeholder="Digite o motivo da meta"
+                placeholder="Digite o valor à depositar para alcançar a meta"
             />
             <div className="flexbox">
                 <Botao aoClicar={aoCancelar} type="button" cor="blue">
@@ -107,6 +106,7 @@ const FormularioMeta = (props) => {
             </div>
         </Formulario>
     );
+
 }
 
-export default FormularioMeta;
+export default FormularioMetaDeposito;

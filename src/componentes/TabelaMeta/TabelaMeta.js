@@ -16,6 +16,7 @@ function TabelaMeta() {
         { titulo: 'Até' },
         { titulo: 'Para' },
         { titulo: 'Porque' },
+        { titulo: 'Valor guardado' },
         { titulo: 'Ações' }
     ];
 
@@ -43,6 +44,10 @@ function TabelaMeta() {
         navigate(`/meta/form/${id}`);
     }
 
+    const aoDepositar = (id) => {
+        navigate(`/meta/form-deposito/${id}`);
+    }
+
     const aoClicarEmNovo = () => {
         navigate('/meta/form');
     }
@@ -55,10 +60,11 @@ function TabelaMeta() {
                     <td className='text-center'>{FormataData(meta.data)}</td>
                     <td>{meta.nome}</td>
                     <td>{meta.motivo}</td>
+                    <td className='text-right'>{FormataValorReal(meta.valorGuardado)}</td>
                     <td className='text-center'>
                         <AiFillCloseCircle className='buttonIcon' size={20} onClick={() => aoDeletar(meta._id)} />
                         <AiFillEdit className='buttonIcon' size={20} onClick={() => aoEditar(meta._id)} />
-                        <BsPiggyBankFill className='buttonIcon' size={20} onClick={() => aoEditar(meta._id)} />
+                        <BsPiggyBankFill className='buttonIcon' size={20} onClick={() => aoDepositar(meta._id)} />
                     </td>
                 </tr>
             ))}
