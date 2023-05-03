@@ -1,6 +1,7 @@
 import './Dashboard.css';
 import { useState, useEffect } from 'react';
 import Card from '../Card/Card';
+import GraficoMeta from '../GraficoMeta/GraficoMeta';
 import { AiOutlineMinusCircle, AiOutlinePlusCircle, AiOutlineCheckCircle } from 'react-icons/ai';
 
 function Dashboard() {
@@ -33,15 +34,18 @@ function Dashboard() {
 
     return (
         <div className='dashboard'>
-            <Card titulo='Despesas' cor='red' valor={totalDespesas}>
-                <AiOutlineMinusCircle className='red' />
-            </Card>
-            <Card titulo='Receitas' cor='green' valor={totalReceitas}>
-                <AiOutlinePlusCircle className='green' />
-            </Card>
-            <Card titulo='Resultado' cor='blue' valor={resultado}>
-                <AiOutlineCheckCircle className='blue' />
-            </Card>
+            <div className='flex'>
+                <Card titulo='Despesas' cor='red' valor={totalDespesas}>
+                    <AiOutlineMinusCircle className='red' />
+                </Card>
+                <Card titulo='Receitas' cor='green' valor={totalReceitas}>
+                    <AiOutlinePlusCircle className='green' />
+                </Card>
+                <Card titulo='Resultado' cor='blue' valor={resultado}>
+                    <AiOutlineCheckCircle className='blue' />
+                </Card>
+            </div>
+            <GraficoMeta />
         </div>
     );
 }
