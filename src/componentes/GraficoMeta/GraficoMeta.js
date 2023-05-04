@@ -1,30 +1,38 @@
 import './GraficoMeta.css';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { AiOutlinePlusCircle } from 'react-icons/ai';
+import { BarChart, Bar, XAxis, YAxis } from 'recharts';
+import { TbTargetArrow } from 'react-icons/tb';
+import { useState, useEffect } from 'react';
 
 function GraficoMeta() {
 
-    const data = [
-        {name: 'Reserva de emergência', vendas: 10},
-        {name: 'Fazer o muro de casa', vendas: 25},
-        {name: 'Lançamento de maio', vendas: 15},
-    ];
+    const [metas, setMetas] = useState([]);
+
+    useEffect(() => {
+        async function fetchMetas() {
+            const response = await fetch('http://localhost:8080/metas');
+            const metasJson = await response.json();
+            setMetas(
+                metasJson.map(meta => {
+                    meta.percentualConcluido = (meta.valorGuardado * 100 / meta.valor).toFixed(2);
+                    return meta;
+                })
+            );
+        }
+        fetchMetas();
+    }, []);
 
     return (
         <div className='grafico'>
             <div className='titulo'>
                 <span className='icone'>
-                    <AiOutlinePlusCircle className='green' />
+                    <TbTargetArrow className='orange' />
                 </span>
                 <span>Gráfico de Metas</span>
             </div>
-            <BarChart width={600} height={300} data={data} layout="vertical">
+            <BarChart className='bar-chart' width={1200} height={300} data={metas} layout="vertical">
                 <XAxis domain={[0, 100]} type="number" />
-                <YAxis type="category" dataKey="name" />
-                <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="vendas" fill="#8884d8" layout="horizontal" />
+                <YAxis type="category" dataKey="nome" />
+                <Bar dataKey="percentualConcluido" fill="#FFB347" layout="horizontal" />
             </BarChart>
         </div>
     );
