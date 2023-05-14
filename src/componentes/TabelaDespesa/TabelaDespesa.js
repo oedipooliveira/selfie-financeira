@@ -2,16 +2,20 @@ import { AiFillCloseCircle, AiFillEdit, AiOutlineCarryOut } from 'react-icons/ai
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './TabelaDespesa.css';
+import Formulario from '../Formulario/Formulario';
 import Tabela from '../Tabela/Tabela';
 import FormataValorReal from '../../util/FormataValorReal';
 import FormataData from '../../util/FormataData';
 import FormataFormaPagamento from '../../util/FormataFormaPagamento';
+import ListaSuspensa from '../ListaSuspensa/ListaSuspensa';
 
 function TabelaDespesa() {
 
     const navigate = useNavigate();
     const [despesas, setDespesas] = useState([]);
     const [grupos, setGrupos] = useState([]);
+    const [periodos, setPeriodos] = useState([]);
+    const [periodo, setPeriodo] = useState('');
 
     const colunas = [
         { titulo: 'Descrição' },
@@ -23,13 +27,42 @@ function TabelaDespesa() {
 
     useEffect(() => {
         async function fetchDespesas() {
-            const response = await fetch('http://localhost:8080/despesas');
-            const despesasJson = await response.json();
-            setDespesas(ordenaDespesasPorGrupo(despesasJson));
-            setGrupos(carregaGruposByDespesas(despesasJson));
+            if (periodo != null && periodo !== "") {
+                const response = await fetch('http://localhost:8080/despesas');
+                const despesasJson = await response.json();
+                setDespesas(ordenaDespesasPorGrupo(despesasJson));
+                setGrupos(carregaGruposByDespesas(despesasJson));
+            }
         }
+
         fetchDespesas();
+    }, [periodo]);
+
+    useEffect(() => {
+        const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+        function populaListaPeriodos() {
+            let mesAtual = (new Date()).getMonth() + 1;
+            let anoAtual = (new Date()).getFullYear();
+            let listaPeriodos = [];
+            for (let i = 0; i < 5; i++) {
+                while (mesAtual > 0) {
+                    listaPeriodos.push({ mes: meses[mesAtual - 1], ano: anoAtual - i })
+                    mesAtual--;
+                }
+                mesAtual = 12
+            }
+            setPeriodos(listaPeriodos);
+        }
+
+        populaListaPeriodos();
     }, []);
+
+    useEffect(() => {
+        if (periodos != null && periodos.length > 0) {
+            setPeriodo(`${periodos[0].mes}/${periodos[0].ano}`);
+        }
+    }, [periodos]);
 
     const ordenaDespesasPorGrupo = (despesas) => {
         return despesas.sort((a, b) => {
@@ -109,9 +142,20 @@ function TabelaDespesa() {
     }
 
     return (
-        <Tabela colunas={colunas} titulo="Despesas" aoClicarEmNovo={aoClicarEmNovo}>
-            {carregaLinhasTabelaDespesa()}
-        </Tabela>
+        <div>
+            <Formulario titulo="Despesas">
+                <ListaSuspensa
+                    valor={periodo}
+                    aoAlterado={valor => setPeriodo(valor)}
+                    obrigatorio={false}
+                    label="Mês"
+                    itens={periodos.map(p => ({key: `${p.mes}/${p.ano}`, value: `${p.mes}/${p.ano}`}))}
+                />
+            </Formulario>
+            <Tabela colunas={colunas} titulo="Despesas" aoClicarEmNovo={aoClicarEmNovo}>
+                {carregaLinhasTabelaDespesa()}
+            </Tabela>
+        </div>
     );
 }
 
