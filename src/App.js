@@ -13,6 +13,7 @@ import TabelaMeta from './componentes/TabelaMeta/TabelaMeta';
 import FormularioMeta from './componentes/FormularioMeta/FormularioMeta';
 import FormularioMetaDeposito from './componentes/FormularioMetaDeposito/FormularioMetaDeposito';
 import Rodape from './componentes/Rodape/Rodape';
+import Login from './componentes/Login/Login';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
 
             <Routes>
                 <Route path="/" element={<Dashboard/>} />
+                <Route path="/login" element={<Login/>} />
                 <Route path="/dashboard" element={<Dashboard/>} />
                 <Route path="/grupo" element={<TabelaGrupo/>} />
                 <Route path="/grupo/form/:id?" element={<FormularioGrupo/>} />
