@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { AiOutlinePoweroff } from 'react-icons/ai';
 import './Header.css';
 
 function Header() {
@@ -20,6 +21,9 @@ function Header() {
                 </Link>
                 <Link className="link" to="/meta">
                     Metas
+                </Link>
+                <Link className="link btn-sair" to="/login">
+                    <AiOutlinePoweroff size={20} />
                 </Link>
             </nav>
         </header>

@@ -44,7 +44,7 @@ function Dashboard() {
         const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
         function populaListaPeriodos() {
-            let mesAtual = (new Date()).getMonth() + 2;
+            let mesAtual = (new Date()).getMonth() + 1;
             let anoAtual = (new Date()).getFullYear();
             let listaPeriodos = [];
             for (let i = 0; i < 5; i++) {

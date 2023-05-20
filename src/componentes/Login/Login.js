@@ -2,6 +2,7 @@ import './Login.css';
 import { useState } from 'react';
 import Formulario from '../Formulario/Formulario';
 import CampoTexto from '../CampoTexto/CampoTexto';
+import Botao from '../Botao/Botao';
 
 const Login = () => {
 
@@ -13,23 +14,28 @@ const Login = () => {
     }
 
     return (
-        <Formulario titulo="Login" onSubmit={aoLogar}>
-            <CampoTexto
-                valor={usuario}
-                aoAlterado={valor => setUsuario(valor)}
-                label="Usuário"
-                obrigatorio={true}
-                placeholder="Digite seu usuário"
-            />
-            <CampoTexto
-                valor={senha}
-                aoAlterado={valor => setSenha(valor)}
-                label="Senha"
-                obrigatorio={true}
-                placeholder="Digite sua senha"
-                tipo="password"
-            />
-        </Formulario>
+        <div className="form-login">
+            <Formulario titulo="Login" onSubmit={aoLogar}>
+                <CampoTexto
+                    valor={usuario}
+                    aoAlterado={valor => setUsuario(valor)}
+                    label="Usuário"
+                    obrigatorio={true}
+                    placeholder="Digite seu usuário"
+                />
+                <CampoTexto
+                    valor={senha}
+                    aoAlterado={valor => setSenha(valor)}
+                    label="Senha"
+                    obrigatorio={true}
+                    placeholder="Digite sua senha"
+                    tipo="password"
+                />
+                    <Botao type="submit" largura="full">
+                        Entrar
+                    </Botao>
+            </Formulario>
+        </div>
     );
 }
 
