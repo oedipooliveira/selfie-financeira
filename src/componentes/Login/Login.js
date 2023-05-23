@@ -31,9 +31,13 @@ const Login = () => {
                     placeholder="Digite sua senha"
                     tipo="password"
                 />
-                    <Botao type="submit" largura="full">
-                        Entrar
-                    </Botao>
+                <Botao type="submit" largura="full">
+                    Entrar
+                </Botao>
+                <p className="text-center text-bold">OU</p>
+                <Botao type="submit" largura="full" cor="blue">
+                    Criar conta
+                </Botao>
             </Formulario>
         </div>
     );
