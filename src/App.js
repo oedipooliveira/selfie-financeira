@@ -14,6 +14,7 @@ import FormularioMeta from './componentes/FormularioMeta/FormularioMeta';
 import FormularioMetaDeposito from './componentes/FormularioMetaDeposito/FormularioMetaDeposito';
 import Rodape from './componentes/Rodape/Rodape';
 import Login from './componentes/Login/Login';
+import Conta from './componentes/Conta/Conta';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Dashboard/>} />
                 <Route path="/login" element={<Login/>} />
+                <Route path="/conta" element={<Conta/>} />
                 <Route path="/dashboard" element={<Dashboard/>} />
                 <Route path="/grupo" element={<TabelaGrupo/>} />
                 <Route path="/grupo/form/:id?" element={<FormularioGrupo/>} />

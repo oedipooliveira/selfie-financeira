@@ -1,16 +1,23 @@
 import './Login.css';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Formulario from '../Formulario/Formulario';
 import CampoTexto from '../CampoTexto/CampoTexto';
 import Botao from '../Botao/Botao';
 
 const Login = () => {
 
+    const navigate = useNavigate();
+
     const [usuario, setUsuario] = useState('');
     const [senha, setSenha] = useState('');
 
     const aoLogar = (event) => {
 
+    }
+
+    const aoCriarConta = () => {
+        navigate('/conta');
     }
 
     return (
@@ -34,8 +41,7 @@ const Login = () => {
                 <Botao type="submit" largura="full">
                     Entrar
                 </Botao>
-                <p className="text-center text-bold">OU</p>
-                <Botao type="submit" largura="full" cor="blue">
+                <Botao aoClicar={aoCriarConta} type="button" largura="full" cor="blue">
                     Criar conta
                 </Botao>
             </Formulario>
