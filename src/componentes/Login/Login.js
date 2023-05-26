@@ -9,11 +9,32 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-    const [usuario, setUsuario] = useState('');
+    const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
     const aoLogar = (event) => {
+        event.preventDefault();
 
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(
+                {
+                    email,
+                    senha
+                }
+            )
+        };
+
+        fetch(`http://localhost:8080/logar/`, requestOptions)
+            .then(response => response.json())
+            .then(data => {
+//                navigate('/dashboard');
+                console.log(data);
+            });
+
+        setEmail('');
+        setSenha('');
     }
 
     const aoCriarConta = () => {
@@ -24,11 +45,11 @@ const Login = () => {
         <div className="form-login">
             <Formulario titulo="Login" onSubmit={aoLogar}>
                 <CampoTexto
-                    valor={usuario}
-                    aoAlterado={valor => setUsuario(valor)}
-                    label="Usuário"
+                    valor={email}
+                    aoAlterado={valor => setEmail(valor)}
+                    label="E-mail"
                     obrigatorio={true}
-                    placeholder="Digite seu usuário"
+                    placeholder="Digite seu e-mail"
                 />
                 <CampoTexto
                     valor={senha}

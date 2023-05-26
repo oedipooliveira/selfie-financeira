@@ -37,8 +37,6 @@ const Conta = () => {
         setNome('');
         setEmail('');
         setSenha('');
-
-        navigate('/login');
     }
 
     return (
