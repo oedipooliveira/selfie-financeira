@@ -41,6 +41,10 @@ const Conta = () => {
         navigate('/login');
     }
 
+    const aoAcessarLogin = (event) => {
+        navigate('/login');
+    }
+
     return (
         <div className="form-login">
             <Formulario titulo="Criar Conta" onSubmit={aoSalvar}>
@@ -68,6 +72,9 @@ const Conta = () => {
                 />
                 <Botao type="submit" largura="full">
                     Salvar
+                </Botao>
+                <Botao aoClicar={aoAcessarLogin} type="button" largura="full" cor="blue">
+                    Já possuo uma conta
                 </Botao>
             </Formulario>
         </div>
