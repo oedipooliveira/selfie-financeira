@@ -29,8 +29,10 @@ const Login = () => {
         fetch(`http://localhost:8080/logar/`, requestOptions)
             .then(response => response.json())
             .then(data => {
-//                navigate('/dashboard');
-                console.log(data);
+                if (data?.access_token) {
+                    sessionStorage.setItem('access_token', data.access_token);
+                    navigate('/dashboard');
+                }
             });
 
         setEmail('');
