@@ -1,4 +1,6 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { isAuthenticated } from './auth/Auth';
+import PrivateRoute from './PrivateRoute';
 import Header from './componentes/Header/Header';
 import Dashboard from './componentes/Dashboard/Dashboard';
 import TabelaGrupo from './componentes/TabelaGrupo/TabelaGrupo';
@@ -18,26 +20,34 @@ import Conta from './componentes/Conta/Conta';
 
 function App() {
 
+    function RequireAuth({ children }: { children: JSX.Element }) {
+      if (!isAuthenticated()) {
+        return <Navigate to="/login" />;
+      }
+
+      return children;
+    }
+
     return (
         <BrowserRouter>
             <Header></Header>
 
             <Routes>
-                <Route path="/" element={<Dashboard/>} />
+                <Route path="/" element={<Login/>} />
                 <Route path="/login" element={<Login/>} />
                 <Route path="/conta" element={<Conta/>} />
-                <Route path="/dashboard" element={<Dashboard/>} />
-                <Route path="/grupo" element={<TabelaGrupo/>} />
-                <Route path="/grupo/form/:id?" element={<FormularioGrupo/>} />
-                <Route path="/despesa" element={<TabelaDespesa/>} />
-                <Route path="/despesa/form/:id?" element={<FormularioDespesa/>} />
-                <Route path="/despesa/form-quitacao/:id?" element={<FormularioDespesaQuitacao/>} />
-                <Route path="/receita" element={<TabelaReceita/>} />
-                <Route path="/receita/form/:id?" element={<FormularioReceita/>} />
-                <Route path="/receita/form-quitacao/:id?" element={<FormularioReceitaQuitacao/>} />
-                <Route path="/meta" element={<TabelaMeta/>} />
-                <Route path="/meta/form/:id?" element={<FormularioMeta/>} />
-                <Route path="/meta/form-deposito/:id?" element={<FormularioMetaDeposito/>} />
+                <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
+                <Route path="/grupo" element={<RequireAuth><TabelaGrupo /></RequireAuth>} />
+                <Route path="/grupo/form/:id?" element={<RequireAuth><FormularioGrupo /></RequireAuth>} />
+                <Route path="/despesa" element={<RequireAuth><TabelaDespesa /></RequireAuth>} />
+                <Route path="/despesa/form/:id?" element={<RequireAuth><FormularioDespesa /></RequireAuth>} />
+                <Route path="/despesa/form-quitacao/:id?" element={<RequireAuth><FormularioDespesaQuitacao /></RequireAuth>} />
+                <Route path="/receita" element={<RequireAuth><TabelaReceita /></RequireAuth>} />
+                <Route path="/receita/form/:id?" element={<RequireAuth><FormularioReceita /></RequireAuth>} />
+                <Route path="/receita/form-quitacao/:id?" element={<RequireAuth><FormularioReceitaQuitacao /></RequireAuth>} />
+                <Route path="/meta" element={<RequireAuth><TabelaMeta /></RequireAuth>} />
+                <Route path="/meta/form/:id?" element={<RequireAuth><FormularioMeta /></RequireAuth>} />
+                <Route path="/meta/form-deposito/:id?" element={<RequireAuth><FormularioMetaDeposito /></RequireAuth>} />
                 <Route path="*" element={<div>Página não encontrada</div>} />
             </Routes>
 
