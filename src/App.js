@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useState } from 'react';
 import { isAuthenticated } from './auth/Auth';
-import PrivateRoute from './PrivateRoute';
 import Header from './componentes/Header/Header';
 import Dashboard from './componentes/Dashboard/Dashboard';
 import TabelaGrupo from './componentes/TabelaGrupo/TabelaGrupo';
@@ -20,21 +20,32 @@ import Conta from './componentes/Conta/Conta';
 
 function App() {
 
-    function RequireAuth({ children }: { children: JSX.Element }) {
-      if (!isAuthenticated()) {
-        return <Navigate to="/login" />;
-      }
+    const [autenticado, setAutenticado] = useState(isAuthenticated);
 
-      return children;
+    function RequireAuth({ children }: { children: JSX.Element }) {
+        if (!isAuthenticated()) {
+            return <Navigate to="/login" />;
+        }
+
+        return children;
+    }
+
+    const aoDeslogar = (event) => {
+        sessionStorage.removeItem('access_token');
+        setAutenticado(false);
+    }
+
+    const aoLogar = (event) => {
+        setAutenticado(true);
     }
 
     return (
         <BrowserRouter>
-            <Header></Header>
+            <Header aoDeslogar={aoDeslogar} autenticado={autenticado}></Header>
 
             <Routes>
                 <Route path="/" element={<Login/>} />
-                <Route path="/login" element={<Login/>} />
+                <Route path="/login" element={<Login aoEfetuarLogin={aoLogar}/>} />
                 <Route path="/conta" element={<Conta/>} />
                 <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
                 <Route path="/grupo" element={<RequireAuth><TabelaGrupo /></RequireAuth>} />

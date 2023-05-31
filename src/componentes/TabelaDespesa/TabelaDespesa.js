@@ -28,7 +28,11 @@ function TabelaDespesa() {
     useEffect(() => {
         async function fetchDespesas() {
             if (periodo != null && periodo !== "") {
-                const response = await fetch(`http://localhost:8080/despesas?periodo=${periodo}`);
+                const response = await fetch(`http://localhost:8080/despesas?periodo=${periodo}`, {
+                    headers: {
+                        'Authorization': `Bearer ${sessionStorage.getItem('access_token')}`
+                    }
+                });
                 const despesasJson = await response.json();
                 setDespesas(ordenaDespesasPorGrupo(despesasJson));
                 setGrupos(carregaGruposByDespesas(despesasJson));

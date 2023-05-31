@@ -5,7 +5,7 @@ import Formulario from '../Formulario/Formulario';
 import CampoTexto from '../CampoTexto/CampoTexto';
 import Botao from '../Botao/Botao';
 
-const Login = () => {
+const Login = ({aoEfetuarLogin}) => {
 
     const navigate = useNavigate();
 
@@ -32,6 +32,7 @@ const Login = () => {
                 if (data?.access_token) {
                     sessionStorage.setItem('access_token', data.access_token);
                     navigate('/dashboard');
+                    aoEfetuarLogin();
                 }
             });
 
