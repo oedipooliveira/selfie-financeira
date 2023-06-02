@@ -21,7 +21,12 @@ const FormularioReceita = (props) => {
 
     useEffect(() => {
         async function buscarReceita() {
-            const response = await fetch(`http://localhost:8080/receitas/${id}`);
+            const requestOptions = {
+                headers: {
+                    "Authorization": `Bearer ${sessionStorage.getItem('access_token')}`
+                }
+            };
+            const response = await fetch(`http://localhost:8080/receitas/${id}`, requestOptions);
             const receitaJson = await response.json();
             setDescricao(receitaJson.descricao);
             setValor(receitaJson.valor);
@@ -36,7 +41,12 @@ const FormularioReceita = (props) => {
 
     useEffect(() => {
         async function fetchGrupos() {
-            const response = await fetch('http://localhost:8080/grupos');
+            const requestOptions = {
+                headers: {
+                    "Authorization": `Bearer ${sessionStorage.getItem('access_token')}`
+                }
+            };
+            const response = await fetch('http://localhost:8080/grupos', requestOptions);
             const gruposJson = await response.json();
             setGrupos(gruposJson);
         }
@@ -48,7 +58,10 @@ const FormularioReceita = (props) => {
 
         const requestOptions = {
             method: (id != null ? "PUT" : "POST"),
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${sessionStorage.getItem('access_token')}`
+            },
             body: JSON.stringify(
                 {
                     descricao,

@@ -25,8 +25,13 @@ function TabelaReceita() {
 
     useEffect(() => {
         async function fetchReceitas() {
+            const requestOptions = {
+                headers: {
+                    "Authorization": `Bearer ${sessionStorage.getItem('access_token')}`
+                }
+            };
             if (periodo != null && periodo !== "") {
-                const response = await fetch(`http://localhost:8080/receitas?periodo=${periodo}`);
+                const response = await fetch(`http://localhost:8080/receitas?periodo=${periodo}`, requestOptions);
                 const receitasJson = await response.json();
                 setReceitas(receitasJson);
             }

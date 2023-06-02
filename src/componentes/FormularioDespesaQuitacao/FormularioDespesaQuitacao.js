@@ -23,7 +23,14 @@ const FormularioDespesaQuitacao = (props) => {
 
     useEffect(() => {
         async function buscarDespesa() {
-            const response = await fetch(`http://localhost:8080/despesas/${id}`);
+
+            const requestOptions = {
+                headers: {
+                    "Authorization": `Bearer ${sessionStorage.getItem('access_token')}`
+                }
+            };
+
+            const response = await fetch(`http://localhost:8080/despesas/${id}`, requestOptions);
             const despesaJson = await response.json();
             setDescricao(despesaJson.descricao);
             setValor(despesaJson.valor);
@@ -42,7 +49,10 @@ const FormularioDespesaQuitacao = (props) => {
 
         const requestOptions = {
             method: (id != null ? "PUT" : "POST"),
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${sessionStorage.getItem('access_token')}`
+            },
             body: JSON.stringify(
                 {
                     descricao,
