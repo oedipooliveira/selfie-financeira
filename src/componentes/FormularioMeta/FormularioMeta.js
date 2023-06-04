@@ -20,7 +20,12 @@ const FormularioMeta = (props) => {
 
     useEffect(() => {
         async function buscarMeta() {
-            const response = await fetch(`http://localhost:8080/metas/${id}`);
+            const requestOptions = {
+                headers: {
+                    "Authorization": `Bearer ${sessionStorage.getItem('access_token')}`
+                }
+            };
+            const response = await fetch(`http://localhost:8080/metas/${id}`, requestOptions);
             const metaJson = await response.json();
             setValor(metaJson.valor);
             setData(metaJson.data);
@@ -39,7 +44,10 @@ const FormularioMeta = (props) => {
 
         const requestOptions = {
             method: (id != null ? "PUT" : "POST"),
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${sessionStorage.getItem('access_token')}`
+            },
             body: JSON.stringify(
                 {
                     valor,

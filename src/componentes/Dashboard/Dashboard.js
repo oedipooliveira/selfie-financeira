@@ -17,7 +17,12 @@ function Dashboard() {
     useEffect(() => {
         async function fetchTotalDespesas() {
             if (periodo != null && periodo !== "") {
-                const response = await fetch(`http://localhost:8080/despesas/total?periodo=${periodo}`);
+                const requestOptions = {
+                    headers: {
+                        "Authorization": `Bearer ${sessionStorage.getItem('access_token')}`
+                    }
+                };
+                const response = await fetch(`http://localhost:8080/despesas/total?periodo=${periodo}`, requestOptions);
                 const totalDespesasJson = await response.json();
                 setTotalDespesas(totalDespesasJson.totalDespesas);
             }
@@ -28,7 +33,12 @@ function Dashboard() {
     useEffect(() => {
         async function fetchTotalReceitas() {
             if (periodo != null && periodo !== "") {
-                const response = await fetch(`http://localhost:8080/receitas/total?periodo=${periodo}`);
+                const requestOptions = {
+                    headers: {
+                        "Authorization": `Bearer ${sessionStorage.getItem('access_token')}`
+                    }
+                };
+                const response = await fetch(`http://localhost:8080/receitas/total?periodo=${periodo}`, requestOptions);
                 const totalReceitasJson = await response.json();
                 setTotalReceitas(totalReceitasJson.totalReceitas);
             }

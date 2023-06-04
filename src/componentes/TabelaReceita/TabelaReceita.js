@@ -69,6 +69,7 @@ function TabelaReceita() {
     const aoDeletar = (id) => {
         fetch(`http://localhost:8080/receitas/${id}`, {
             method: 'DELETE',
+            "Authorization": `Bearer ${sessionStorage.getItem('access_token')}`
         })
         .then(response => response.json())
         .then(data => {

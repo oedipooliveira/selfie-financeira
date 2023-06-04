@@ -15,7 +15,12 @@ const FormularioGrupo = (props) => {
 
     useEffect(() => {
         async function buscarGrupo() {
-            const response = await fetch(`http://localhost:8080/grupos/${id}`);
+            const requestOptions = {
+                headers: {
+                    "Authorization": `Bearer ${sessionStorage.getItem('access_token')}`
+                }
+            };
+            const response = await fetch(`http://localhost:8080/grupos/${id}`, requestOptions);
             const grupoJson = await response.json();
             setNome(grupoJson.nome);
         }
@@ -30,7 +35,10 @@ const FormularioGrupo = (props) => {
 
         const requestOptions = {
             method: (id != null ? "PUT" : "POST"),
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${sessionStorage.getItem('access_token')}`
+            },
             body: JSON.stringify(
                 {
                     nome

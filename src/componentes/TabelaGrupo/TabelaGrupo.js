@@ -15,7 +15,12 @@ function TabelaGrupo() {
 
     useEffect(() => {
         async function fetchGrupos() {
-            const response = await fetch('http://localhost:8080/grupos');
+            const requestOptions = {
+                headers: {
+                    "Authorization": `Bearer ${sessionStorage.getItem('access_token')}`
+                }
+            };
+            const response = await fetch('http://localhost:8080/grupos', requestOptions);
             const gruposJson = await response.json();
             setGrupos(gruposJson);
         }
@@ -25,6 +30,7 @@ function TabelaGrupo() {
     const aoDeletar = (id) => {
         fetch(`http://localhost:8080/grupos/${id}`, {
             method: 'DELETE',
+            "Authorization": `Bearer ${sessionStorage.getItem('access_token')}`
         })
         .then(response => response.json())
         .then(data => {

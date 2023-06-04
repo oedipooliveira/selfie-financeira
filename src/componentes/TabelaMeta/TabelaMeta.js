@@ -22,7 +22,12 @@ function TabelaMeta() {
 
     useEffect(() => {
         async function fetchMetas() {
-            const response = await fetch('http://localhost:8080/metas');
+            const requestOptions = {
+                headers: {
+                    "Authorization": `Bearer ${sessionStorage.getItem('access_token')}`
+                }
+            };
+            const response = await fetch('http://localhost:8080/metas', requestOptions);
             const metasJson = await response.json();
             setMetas(metasJson);
         }
@@ -32,6 +37,7 @@ function TabelaMeta() {
     const aoDeletar = (id) => {
         fetch(`http://localhost:8080/metas/${id}`, {
             method: 'DELETE',
+            "Authorization": `Bearer ${sessionStorage.getItem('access_token')}`
         })
         .then(response => response.json())
         .then(data => {
